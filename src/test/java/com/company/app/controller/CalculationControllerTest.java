@@ -1,4 +1,4 @@
-package com.company.app.controllers;
+package com.company.app.controller;
 
 import com.company.app.service.CalculationService;
 import lombok.SneakyThrows;
