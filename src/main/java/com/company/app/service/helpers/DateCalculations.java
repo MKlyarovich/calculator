@@ -3,7 +3,9 @@ package com.company.app.service.helpers;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import static com.company.app.service.helpers.DaysInYearsCash.isLeapYear;
 
@@ -15,6 +17,7 @@ import static com.company.app.service.helpers.DaysInYearsCash.isLeapYear;
 public class DateCalculations {
 
     private final DaysInYearsCash daysInYearsCash;
+    private final List<MonthDayResolver> monthDayResolvers;
 
     /**
      * Method, that calculates days between next month and end of the year.
@@ -106,48 +109,14 @@ public class DateCalculations {
      * @return amount days of the month
      */
     private int amountDaysOfMonth(int month, int year) {
-        int result = 0;
-        switch (month) {
-            case 1:
-                result = 31;
-                break;
-            case 2:
-                result = isLeapYear(year) ? 29 : 28;
-                break;
-            case 3:
-                result = 31;
-                break;
-            case 4:
-                result = 30;
-                break;
-            case 5:
-                result = 31;
-                break;
-            case 6:
-                result = 30;
-                break;
-            case 7:
-                result = 31;
-                break;
-            case 8:
-                result = 31;
-                break;
-            case 9:
-                result = 30;
-                break;
-            case 10:
-                result = 31;
-                break;
-            case 11:
-                result = 30;
-                break;
-            case 12:
-                result = 31;
-                break;
-            default:
-                throw new IllegalArgumentException("The month is incorrect. It must be between 1 and 12");
-        }
+        Optional<MonthDayResolver> monthDayResolver = monthDayResolvers.stream()
+                .filter(it -> it.isSupport(month))
+                .findFirst();
 
-        return result;
+        if (monthDayResolver.isPresent()) {
+            return monthDayResolver.get().getDaysNumber(isLeapYear(year));
+        } else {
+            throw new IllegalArgumentException(String.format("Unsupported month number: %s", month));
+        }
     }
 }
