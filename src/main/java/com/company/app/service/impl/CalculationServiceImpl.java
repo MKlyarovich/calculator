@@ -110,7 +110,7 @@ public class CalculationServiceImpl implements CalculationService {
     }
 
     public static boolean checkFormatDate(String userNameString) {
-        Pattern p = Pattern.compile("(0[1-9]|1[0-2])[ ](0[1-9]|1\\d|2\\d|3[01])[ ](19\\d{2}|200\\d|2010)");
+        Pattern p = Pattern.compile("(0[1-9]|1\\d|2\\d|3[01])[ ](0[1-9]|1[0-2])[ ](19\\d{2}|200\\d|2010)");
         Matcher m = p.matcher(userNameString);
 
         return m.matches();

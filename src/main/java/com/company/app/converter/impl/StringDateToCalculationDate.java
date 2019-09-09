@@ -18,10 +18,10 @@ public class StringDateToCalculationDate implements Converter {
     @Override
     public CalculationDate convert(String source) {
         StringTokenizer tokens = new StringTokenizer(source, " ");
-        int month = Integer.parseInt(tokens.nextToken());
         int day = Integer.parseInt(tokens.nextToken());
+        int month = Integer.parseInt(tokens.nextToken());
         int year = Integer.parseInt(tokens.nextToken());
 
-        return new CalculationDate(month, day, year);
+        return new CalculationDate(day, month, year);
     }
 }

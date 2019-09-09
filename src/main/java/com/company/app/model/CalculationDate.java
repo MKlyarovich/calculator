@@ -6,8 +6,8 @@ import lombok.Data;
 @Data
 @AllArgsConstructor
 public class CalculationDate implements Comparable<CalculationDate> {
-    private final int month;
     private final int day;
+    private final int month;
     private final int year;
 
     @Override
@@ -29,7 +29,7 @@ public class CalculationDate implements Comparable<CalculationDate> {
 
     @Override
     public String toString() {
-        return "" + (String.valueOf(month).length() == 1 ? ("0" + month) : month) + " " +
-                (String.valueOf(day).length() == 1 ? ("0" + day) : day) + " " + year;
+        return "" + (String.valueOf(day).length() == 1 ? ("0" + day) : day) + " " +
+                (String.valueOf(month).length() == 1 ? ("0" + month) : month) + " " + year;
     }
 }

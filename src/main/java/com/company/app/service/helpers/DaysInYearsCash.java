@@ -35,7 +35,7 @@ public class DaysInYearsCash {
                 .collect(Collectors.toMap(k -> k, DaysInYearsCash::getAmountDaysInYear));
     }
 
-    public static boolean isLeapYear(int year) {
+    static boolean isLeapYear(int year) {
         return year % 400 == 0 || (year % 4 == 0 && year % 100 != 0);
     }
 
